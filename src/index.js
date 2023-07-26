@@ -103,15 +103,15 @@ $("#signin").addEventListener("click", (e) => {
         console.log(result);
         localStorage.setItem('token', result.token);
         localStorage.setItem('user',result.user.id);
-        localStorage.setItem('usernam',result?.user?.fuul_name);
-        window.location.href ="./profile.html"
+        localStorage.setItem('username',result?.user?.full_name);
+        window.location.href ="./profil.html"
         if (result.statusCode == "400") {
-          alert(result.message);
+         
           $("#login_password").classList.add("border", "border-2", "border-red-500");
           $("#login_user").classList.add("border", "border-2", "border-red-500");
 
         } else {
-          alert("Success!");
+         
           $("#login_password").classList.add("border", "border-2", "border-green-500");
           $("#login_user").classList.add("border", "border-2", "border-green-500");
         }
@@ -126,3 +126,46 @@ $("#signin").addEventListener("click", (e) => {
 });
 
 //------------- authorization action end---------------
+
+
+function authChek(){
+  if(localStorage.getItem("token")){
+    $(".menu").classList.remove('hidden');
+    $("#openModal").classList.add('hidden');
+    $("#user_info").textContent = localStorage.getItem("username");
+  }else{
+    $(".menu").classList.add('hidden');
+    $(".dropdown").classList.add('hidden');
+    $("#openModal").classList.remove('hidden');
+  }
+
+}
+authChek();
+
+$(".menu").addEventListener("click",()=>{
+  $(".dropdown").classList.toggle("hidden");
+});
+
+
+
+$('#logout').addEventListener("click",()=>{
+  localStorage.clear();
+  location.reload();
+})
+
+// function listRender(state, selector){
+//   console.log(state);
+//   console.log(selector);
+
+//   if(state.length){
+
+//     state?.forEach(()=>{
+//       const card =document.createElement("div")
+//       card.classList.add("card");
+//       card.innerHTML = `<img src ="htmls://picsum.photos/id221/300/300"><h1>Lorem</h1>`;
+//       $(selector).append(card)
+//     })
+//   }else{
+//     $(selector).innerHTML = `<h1 class="text-center">${selector}NOT FOUND</h1>`
+//   }
+// }
